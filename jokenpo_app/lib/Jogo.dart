@@ -25,10 +25,33 @@ class _JogoState extends State<Jogo> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               //text
+              Padding(
+                padding: EdgeInsets.only(top: 32, bottom: 16),
+                child: Text(
+                  "Escolha do App",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.asset("images/padrao.png"),
               Padding(padding: EdgeInsets.fromLTRB(0, 16, 0, 0)),
-              Text(
-                "Escolha do App",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              Padding(
+                padding: EdgeInsets.only(top: 32, bottom: 16),
+                child: Text(
+                  "Escolha uma opção abaixo",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Padding(padding: EdgeInsets.fromLTRB(0, 16, 0, 0)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Image.asset(
+                    "images/pedra.png",
+                    height: 95,
+                  ),
+                  Image.asset("images/papel.png", height: 95),
+                  Image.asset("images/tesoura.png", height: 95),
+                ],
               )
               // image
               //text
