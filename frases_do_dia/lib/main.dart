@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,6 +18,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  var _frases = [
+    "La gente se rie de mi por que soy diferente, yo me rio de ellos por que son todos iguales.",
+    "Solo hay una felicidad en la vida – amar y ser amado.",
+    "La muerte destroza al hombre: la idea de la muerte le salva.",
+    "El placer y la acción hacen que las horas parezcan cortas."
+  ];
+  var _fraseGerada = "Clique abaixo para gerar uma frase";
+
+  void _gerarFrase() {
+    var numeroSorteado = Random().nextInt(_frases.length);
+    setState(() {
+      _fraseGerada = _frases[numeroSorteado];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,12 +52,12 @@ class _HomeState extends State<Home> {
               children: [
                 Image.asset("images/logo.png"),
                 Text(
-                  "Clique abaixo para gerar uma frase",
-                  textAlign: TextAlign.justify,
+                  _fraseGerada,
+                  textAlign: TextAlign.left,
                   style: TextStyle(fontSize: 25, fontStyle: FontStyle.italic),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _gerarFrase,
                   style: ButtonStyle(
                       backgroundColor: MaterialStateColor.resolveWith(
                           (states) => Colors.green)),
