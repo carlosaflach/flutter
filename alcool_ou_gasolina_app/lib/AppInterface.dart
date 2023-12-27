@@ -10,8 +10,33 @@ class Interface extends StatefulWidget {
 }
 
 class _InterfaceState extends State<Interface> {
-  TextEditingController _controllerAlcool = TextEditingController();
-  TextEditingController _controllerGasolina = TextEditingController();
+  final TextEditingController _controllerAlcool = TextEditingController();
+  final TextEditingController _controllerGasolina = TextEditingController();
+  String _textoResultado = "";
+
+  void _calculaResultado() {
+    double? precoAlcool = double.tryParse(_controllerAlcool.text);
+    double? precoGasolina = double.tryParse(_controllerGasolina.text);
+
+    if (precoAlcool == null || precoGasolina == null) {
+      print("preco null");
+      setState(() {
+        _textoResultado =
+            "Número inválido, digite números maiores que 0 e utilizando o (.)";
+      });
+    } else {
+      double divisao = precoAlcool / precoGasolina;
+      if (divisao >= 0.7) {
+        setState(() {
+          _textoResultado = "Melhor abastecer gasolina";
+        });
+      } else {
+        setState(() {
+          _textoResultado = "Melhor abastecer alcool";
+        });
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +48,7 @@ class _InterfaceState extends State<Interface> {
           style: TextStyle(color: Colors.white),
         ),
       ),
-      body: Container(
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(32),
         child: Column(
           // make button take all space in the container
@@ -51,20 +76,29 @@ class _InterfaceState extends State<Interface> {
               style: TextStyle(fontSize: 22),
               controller: _controllerGasolina,
             ),
-            Padding(padding: EdgeInsets.only(bottom: 16)),
-            ElevatedButton(
-                onPressed: () {},
-                child: Text(
-                  "Calcular",
-                  style: TextStyle(color: Colors.white),
-                ),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateColor.resolveWith((states) => Colors.blue),
-                    shape: MaterialStateProperty.all(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10))),
-                    padding: MaterialStateProperty.resolveWith(
-                        (states) => (EdgeInsets.all(15))))),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16, top: 16),
+              child: ElevatedButton(
+                  onPressed: _calculaResultado,
+                  child: Text(
+                    "Calcular",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateColor.resolveWith(
+                          (states) => Colors.blue),
+                      shape: MaterialStateProperty.all(RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10))),
+                      padding: MaterialStateProperty.resolveWith(
+                          (states) => (EdgeInsets.all(15))))),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text(
+                _textoResultado,
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+            )
           ],
         ),
       ),
