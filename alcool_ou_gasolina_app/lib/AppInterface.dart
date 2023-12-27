@@ -10,6 +10,9 @@ class Interface extends StatefulWidget {
 }
 
 class _InterfaceState extends State<Interface> {
+  TextEditingController _controllerAlcool = TextEditingController();
+  TextEditingController _controllerGasolina = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +26,7 @@ class _InterfaceState extends State<Interface> {
       body: Container(
         padding: EdgeInsets.all(32),
         child: Column(
+          // make button take all space in the container
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Image.asset("images/logo.png"),
@@ -38,12 +42,14 @@ class _InterfaceState extends State<Interface> {
               decoration:
                   InputDecoration(label: Text("Preco Álcool, ex: 1.59")),
               style: TextStyle(fontSize: 22),
+              controller: _controllerAlcool,
             ),
             TextField(
               keyboardType: TextInputType.number,
               decoration:
                   InputDecoration(label: Text("Preco Gasolina, ex: 3.15")),
               style: TextStyle(fontSize: 22),
+              controller: _controllerGasolina,
             ),
             Padding(padding: EdgeInsets.only(bottom: 16)),
             ElevatedButton(
