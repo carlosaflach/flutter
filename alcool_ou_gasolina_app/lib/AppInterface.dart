@@ -19,7 +19,6 @@ class _InterfaceState extends State<Interface> {
     double? precoGasolina = double.tryParse(_controllerGasolina.text);
 
     if (precoAlcool == null || precoGasolina == null) {
-      print("preco null");
       setState(() {
         _textoResultado =
             "Número inválido, digite números maiores que 0 e utilizando o (.)";
@@ -36,6 +35,12 @@ class _InterfaceState extends State<Interface> {
         });
       }
     }
+    limpaCampos();
+  }
+
+  void limpaCampos() {
+    _controllerGasolina.text = "";
+    _controllerAlcool.text = "";
   }
 
   @override
